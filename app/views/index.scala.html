@@ -1,0 +1,46 @@
+@(tweets: List[Tweet])(user: User)
+
+@main("Welcome to Twitter") {
+    <div class="container">
+
+    <!--Banner -->
+    <div class="row" id="top-menu">
+        <div class="col-xs-3" id="user_info">@user.username @@@user.twitter_name</div>
+        <div class="col-xs-6">Mock Twitter</div>
+
+    <!--DropDown-->
+        <div class="dropdown col-xs-3">
+            <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="menu">Menu<span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                <li><a href="@routes.FindUser.findUser()">Find User</a></li>
+                <li><a href="@routes.Follows.follows()">Follows</a></li>
+                <li><a href="@routes.Followers.followers()">Followers</a></li>
+                <li><a href="@routes.Logout.logout()">Logout</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <br>
+
+    <form action="@routes.Application.addTweet()" method="post">
+            <!--Tweet box -->
+        <div class="row">
+            <div class="col-xs-9"><textarea class="form-control" name="comment"></textarea></div>
+            <div class="col-xs-1"><button type="submit" class="btn btn-md btn-primary" id="tweet-button">Tweet</button></div>
+        </div>
+    </form>
+
+    <br>
+            <!--Tweets -->
+
+            <table class="table">
+                @for(tweet <- tweets) {
+                    <tr><td>
+                    @tweet.user.username <span class="tw_name">@@@tweet.user.twitter_name</span><br>
+                    @tweet.comment<br>
+                    <span class="tw_name">@tweet.postdate</span>
+                    </td></tr>
+                }
+            </table>
+    </div>
+}

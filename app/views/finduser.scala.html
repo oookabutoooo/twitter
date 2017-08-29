@@ -1,0 +1,44 @@
+@(users: List[User])(user: User)(followed: List[User])
+@main("Follow"){
+    <div class="container">
+
+            <!--Banner -->
+        <div class="row" id="top-menu">
+            <div class="col-xs-3" id="user_info">@user.username @@@user.twitter_name</div>
+            <div class="col-xs-6">Find User</div>
+
+                <!--DropDown-->
+            <div class="dropdown col-xs-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="menu">Menu<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="@routes.Application.index()">Home</a></li>
+                    <li><a href="@routes.Follows.follows()">Follows</a></li>
+                    <li><a href="@routes.Followers.followers()">Followers</a></li>
+                    <li><a href="@routes.Logout.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <br>
+        <table class="table">
+            <tr><th>Username</th><th>Twitter name</th><th>Follow?</th></tr>
+        @for(follow <- users) {
+            <tr>
+                <td> @follow.username</td>
+                <td> @@@follow.twitter_name</td>
+                <td>
+                    <form action="@routes.FindUser.addFollow()" method="post">
+                        <input type="hidden" name="twitter_name" value="@follow.twitter_name">
+                        @if(followed.contains(follow)){
+                            <button type="submit" class="btn btn-md btn-primary" disabled>Followed</button>
+                        }else {
+                            <button type="submit" class="btn btn-md btn-primary">Follow</button>
+                        }
+                    </form>
+                </td>
+            </tr>
+        }
+        }
+        </table>
+
+    </div>

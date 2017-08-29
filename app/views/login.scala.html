@@ -1,0 +1,26 @@
+@(invalid: String)
+@main("Twitter Login"){
+    <!--Banner -->
+    <div id="top-menu">Welcome To Twitter</div>
+    <br>
+    <div class="container">
+        <form action="@routes.Login.authenticate()" method="post">
+            <!--Username-->
+            <div class="row">
+                <div class="col-xs-2">Twitter name:</div><div class="col-xs-6"><input class="form-control" type="text" name="twitter_name"></div>
+            </div>
+
+            <br>
+
+            <!--Password -->
+            <div class="row">
+                <div class="col-xs-2">Password:</div><div class="col-xs-6"><input class="form-control" type="password" name="password"></div>
+            </div>
+            <div class="text-center">@invalid</div>
+            <br>
+            <button type="submit" class="btn btn-md btn-primary">Login</button>
+        </form>
+        <br>
+            <a href="@routes.Registration.registration()">Not A Member?</a>
+    </div>
+}

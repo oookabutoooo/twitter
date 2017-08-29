@@ -1,0 +1,60 @@
+@(taken: String)(users: List[User])
+@main("Twitter Registration"){
+
+    <!--Password Check Script-->
+    <script type="text/javascript" src="@routes.Assets.versioned("javascripts/checkpass.js")"></script>
+
+    <!--Banner -->
+    <div id="top-menu">Twitter Registration</div>
+    <br>
+    <div class="container">
+        <form action="@routes.Registration.addUser()" method="post">
+                <!--Username-->
+            <div class="row">
+                <div class="col-xs-2">Username:</div>
+                <div class="col-xs-6"><input class="form-control" type="text" name="username"></div>
+            </div>
+            <br>
+
+                <!--Name-->
+            <div class="row">
+                <div class="col-xs-2">Twitter Name: @@</div>
+                <div class="col-xs-6"><input class="form-control" type="text" name="twitter_name"></div>
+            </div>
+            <br>
+
+                <!--Password -->
+            <div class="row">
+                <div class="col-xs-2">Password:</div>
+                <div class="col-xs-6"><input class="form-control" type="password" name="password" id="pass1"></div>
+            </div>
+            <br>
+
+                <!--Password Confirmation-->
+            <div class="row">
+                <div class="col-xs-2">Confirm Password:</div>
+                <div class="col-xs-6"><input class="form-control" type="password" id="pass2" onkeyup="checkPass(); return false;"></div>
+                <span id="confirmMessage"></span>
+            </div>
+            <br>
+            <div class="text-center">@taken</div>
+            <button type="submit" class="btn btn-md btn-primary" id="register-btn" disabled>Register</button>
+        </form>
+        <br>
+        <a href="@routes.Login.login()">Go to Login</a>
+        <br>
+        <table class="table">
+        @for(user <- users) {
+            <tr><td>
+                Id:@user.user_id;
+                <br>
+                Username:@user.username
+                <br>
+                Twittername:@user.twitter_name
+                <br>
+                Password:@user.password
+            </td></tr>
+        }
+        </table>
+    </div>
+}

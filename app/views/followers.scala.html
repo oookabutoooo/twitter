@@ -1,0 +1,33 @@
+@(followers: List[User])(user: User)
+@main("Followers"){
+    <div class="container">
+
+            <!--Banner -->
+        <div class="row" id="top-menu">
+            <div class="col-xs-3" id="user_info">@user.username @@@user.twitter_name</div>
+            <div class="col-xs-6">Followers</div>
+
+                <!--DropDown-->
+            <div class="dropdown col-xs-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" id="menu">Menu<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li><a href="@routes.Application.index()">Home</a></li>
+                    <li><a href="@routes.FindUser.findUser()">Find User</a></li>
+                    <li><a href="@routes.Follows.follows()">Follows</a></li>
+                    <li><a href="@routes.Logout.logout()">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+
+    <table class="table">
+        <tr><th>Username</th><th>Twitter name</th></tr>
+    @for(follower <- followers) {
+        <tr>
+            <td> @follower.username</td>
+            <td> @@@follower.twitter_name</td>
+        </tr>
+    }
+    }
+    </table>
+
+</div>
